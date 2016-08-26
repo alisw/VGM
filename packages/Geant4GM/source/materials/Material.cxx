@@ -47,7 +47,7 @@ Geant4GM::Material::Material(const std::string& name,
     std::cerr << "    Geant4GM::Material::Material: " << std::endl; 
     std::cerr << "    No element defined.";
     std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-    exit(1);
+    throw(1);
   }
 
   // Convert units
@@ -99,7 +99,7 @@ Geant4GM::Material::Material(const std::string& name,
     std::cerr << "    Geant4GM::Material::Material: " << std::endl; 
     std::cerr << "    No element defined.";
     std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-    exit(1);
+    throw(1);
   }
 
   // Convert units
@@ -154,7 +154,7 @@ Geant4GM::Material::Material(const std::string& name,
     std::cerr << "    Geant4GM::Material::Material: " << std::endl; 
     std::cerr << "    No elements defined.";
     std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-    exit(1);
+    throw(1);
   }
 
   // Check coherence
@@ -162,7 +162,7 @@ Geant4GM::Material::Material(const std::string& name,
     std::cerr << "    Geant4GM::Material::Material: " << std::endl; 
     std::cerr << "    Elements size and fractions size differ.";
     std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-    exit(1);
+    throw(1);
   }
     
   // Convert units
@@ -215,7 +215,7 @@ Geant4GM::Material::Material(const std::string& name,
     std::cerr << "    Geant4GM::Material::Material: " << std::endl; 
     std::cerr << "    No elements defined.";
     std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-    exit(1);
+    throw(1);
   }
 
   // Check coherence
@@ -223,7 +223,7 @@ Geant4GM::Material::Material(const std::string& name,
     std::cerr << "    Geant4GM::Material::Material: " << std::endl; 
     std::cerr << "    Elements size and fractions size differ.";
     std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-    exit(1);
+    throw(1);
   }
     
   // Convert units
@@ -274,7 +274,7 @@ Geant4GM::Material::Material(const std::string& name,
     std::cerr << "    Geant4GM::Material::Material: " << std::endl; 
     std::cerr << "    No elements defined.";
     std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-    exit(1);
+    throw(1);
   }
 
   // Check coherence
@@ -282,7 +282,7 @@ Geant4GM::Material::Material(const std::string& name,
     std::cerr << "    Geant4GM::Material::Material: " << std::endl; 
     std::cerr << "    Elements size and atomCounts size differ.";
     std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-    exit(1);
+    throw(1);
   }
     
   // Convert units
@@ -332,7 +332,7 @@ Geant4GM::Material::Material(const std::string& name,
     std::cerr << "    Geant4GM::Material::Material: " << std::endl; 
     std::cerr << "    No elements defined.";
     std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-    exit(1);
+    throw(1);
   }
 
   // Check coherence
@@ -340,7 +340,7 @@ Geant4GM::Material::Material(const std::string& name,
     std::cerr << "    Geant4GM::Material::Material: " << std::endl; 
     std::cerr << "    Elements size and atomCounts size differ.";
     std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-    exit(1);
+    throw(1);
   }
     
   // Convert units
@@ -407,7 +407,7 @@ void Geant4GM::Material::CheckIndex(int iel) const
     std::cerr << "    In material: " << Name() << std::endl;
     std::cerr << "    Index of element " << iel << " outside limits." << std::endl;
     std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-    exit(1);
+    throw(1);
   }  
 }    
 

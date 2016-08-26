@@ -79,7 +79,7 @@ double ClhepVGM::Units::AxisUnit(VGM::Axis axis)
   std::cerr << "    ClhepVGM::Units::AxisUnit:"       << std::endl; 
   std::cerr << "    Undefined axis"                 << std::endl;
   std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-  exit(1);
+  throw(1);
 }
 
 //_____________________________________________________________________________

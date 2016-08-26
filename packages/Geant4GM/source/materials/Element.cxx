@@ -63,7 +63,7 @@ Geant4GM::Element::Element(const std::string& name,
     std::cerr << "    Geant4GM::Element::Element: " << std::endl; 
     std::cerr << "    No isotopes defined.";
     std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-    exit(1);
+    throw(1);
   }
 
   // Check coherence
@@ -71,7 +71,7 @@ Geant4GM::Element::Element(const std::string& name,
     std::cerr << "    Geant4GM::Element::Element: " << std::endl; 
     std::cerr << "    Isotopes size and relAbundances size differ.";
     std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-    exit(1);
+    throw(1);
   }
     
   // Create element
@@ -129,7 +129,7 @@ void Geant4GM::Element::CheckIndex(int i) const
     std::cerr << "    Geant4GM::Element::CheckIndex: " << std::endl;
     std::cerr << "    Index of isotope outside limits." << std::endl;
     std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-    exit(1);
+    throw(1);
   }  
 }    
 

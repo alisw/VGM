@@ -71,7 +71,7 @@ XmlVGM::Maps::Maps()
   std::cerr << "   XmlVGM::Maps::Maps:" << std::endl;
   std::cerr << "   Dummy constructor protected." << std::endl;
   std::cerr << "** Exception: Aborting execution **" << std::endl;   
-  exit(1);
+  throw(1);
 }
 
 //_____________________________________________________________________________
@@ -89,7 +89,7 @@ XmlVGM::Maps::Maps(const Maps& /*right*/)
   std::cerr << "   XmlVGM::Maps::Maps:" << std::endl;
   std::cerr << "   Copy constructor not implemented." << std::endl;
   std::cerr << "** Exception: Aborting execution **" << std::endl;   
-  exit(1);
+  throw(1);
 }
 
 //_____________________________________________________________________________
@@ -113,7 +113,7 @@ XmlVGM::Maps::operator=(const Maps& right)
   std::cerr << "   XmlVGM::Maps::operator=:" << std::endl;
   std::cerr << "   Assignement operator not implemented." << std::endl;
   std::cerr << "** Exception: Aborting execution **" << std::endl;   
-  exit(1);
+  throw(1);
     
   return *this;  
 }    

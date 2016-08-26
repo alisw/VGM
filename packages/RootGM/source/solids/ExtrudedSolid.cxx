@@ -44,7 +44,7 @@ RootGM::ExtrudedSolid::ExtrudedSolid(const std::string& name,
     std::cerr << "+++ Error  +++" << std::endl; 
     std::cerr << "    Number of z-sections = " << zsections.size() 
               << " has to be >= 2" << std::endl;
-    exit(1);
+    throw(1);
   }             
 
   fXtru = new TGeoXtru(zsections.size());
@@ -155,7 +155,7 @@ VGM::TwoVector  RootGM::ExtrudedSolid::Vertex(int index) const
   if ( index < 0 || index > NofVertices() ) {
     std::cerr << "+++ Error  +++" << std::endl; 
     std::cerr << "    Wrong vertex index: " << index << std::endl;
-    exit(1);
+    throw(1);
   }  
  
   return VGM::TwoVector(
@@ -175,7 +175,7 @@ double RootGM::ExtrudedSolid::ZPosition(int iz) const
   if ( iz < 0 || iz > NofZSections() ) {
     std::cerr << "+++ Error  +++" << std::endl; 
     std::cerr << "    Wrong index: " << iz << std::endl;
-    exit(1);
+    throw(1);
   }  
   
   return fXtru->GetZ(iz) * RootGM::Units::Length(); 
@@ -187,7 +187,7 @@ VGM::TwoVector RootGM::ExtrudedSolid::Offset(int iz) const
   if ( iz < 0 || iz > NofZSections() ) {
     std::cerr << "+++ Error  +++" << std::endl; 
     std::cerr << "    Wrong index: " << iz << std::endl;
-    exit(1);
+    throw(1);
   }  
 
   return VGM::TwoVector(fXtru->GetXOffset(iz) * RootGM::Units::Length(), 
@@ -200,7 +200,7 @@ double RootGM::ExtrudedSolid::Scale(int iz) const
   if ( iz < 0 || iz > NofZSections() ) {
     std::cerr << "+++ Error  +++" << std::endl; 
     std::cerr << "    Wrong index: " << iz << std::endl;
-    exit(1);
+    throw(1);
   }  
 
   return fXtru->GetScale(iz); 

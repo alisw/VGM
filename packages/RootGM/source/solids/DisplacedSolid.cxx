@@ -87,7 +87,7 @@ RootGM::DisplacedSolid:: DisplacedSolid(TGeoBBox* box)
     std::cerr << "    Cannot create displaced solid from a box without offset." << std::endl; 
     std::cerr << "    (TGeoBBox name = " << box->GetName() << ")" << std::endl; 
     std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-    exit(1);
+    throw(1);
   }  
   
   // Define new name  

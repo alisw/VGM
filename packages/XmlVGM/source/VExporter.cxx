@@ -70,7 +70,7 @@ XmlVGM::VExporter::VExporter()
   std::cerr << "    XmlVGM::VExporter::VExporter:" << std::endl;
   std::cerr << "    Not allowed constructor." << std::endl;
   std::cerr << "*** Error: Aborting execution  +++" << std::endl; 
-  exit(1);
+  throw(1);
 }
 
 //_____________________________________________________________________________
@@ -86,7 +86,7 @@ XmlVGM::VExporter::VExporter(const VExporter& /*right*/)
   std::cerr << "   XmlVGM::VExporter::VExporter:" << std::endl;
   std::cerr << "   Copy constructor not implemented." << std::endl;
   std::cerr << "** Exception: Aborting execution **" << std::endl;   
-  exit(1);
+  throw(1);
 }
 
 //_____________________________________________________________________________
@@ -111,7 +111,7 @@ XmlVGM::VExporter::operator=(const VExporter& right)
   std::cerr << "   XmlVGM::VExporter::operator=:" << std::endl;
   std::cerr << "   Assignement operator not implemented." << std::endl;
   std::cerr << "** Exception: Aborting execution **" << std::endl;   
-  exit(1);
+  throw(1);
     
   return *this;  
 }    
@@ -308,7 +308,7 @@ void XmlVGM::VExporter::ProcessMaterials(VGM::IVolume* volume)
     std::cerr << "XmlVGM::VExporter::ProcessMaterials: " << std::endl;
     std::cerr << "   Material " << volume->MaterialName() << "not found." 
               << std::endl;
-    exit(1);
+    throw(1);
   }  	      
     
   const VGM::IMaterial* material 
@@ -360,7 +360,7 @@ void XmlVGM::VExporter::ProcessMedia(VGM::IVolume* volume)
     std::cerr << "XmlVGM::VExporter::ProcessMedia: " << std::endl;
     std::cerr << "   Medium " << volume->MediumName() << " not found." 
               << std::endl;
-    // exit(1);
+    // throw(1);
   }  	      
   else     
     fMaps.AddMedium(volumeMedium);

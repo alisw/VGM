@@ -59,7 +59,7 @@ Geant4GM::TessellatedSolid::TessellatedSolid(const std::string& name,
         std::cerr << "+++ Error  +++" << std::endl; 
         std::cerr << "    Number of vertices in a facet = " << facet.size() 
               << " has to be == 3 or 4" << std::endl;
-        exit(1);
+        throw(1);
      }             
      
      if ( facet.size() == 3 ) {
@@ -177,14 +177,14 @@ void  Geant4GM::TessellatedSolid::CheckFacetIndex(int ifacet) const
   if ( ifacet < 0 || ifacet > NofFacets() ) {
     std::cerr << "+++ Error  +++" << std::endl; 
     std::cerr << "    Wrong facet index: " << ifacet << std::endl;
-    exit(1);
+    throw(1);
   }  
 
   G4VFacet* facet = fTessellatedSolid->GetFacet(ifacet);
   if ( ! facet ) {
     std::cerr << "+++ Error  +++" << std::endl; 
     std::cerr << "    Facet with index: " << ifacet << " not found." << std::endl;
-    exit(1);
+    throw(1);
   }  
 
 }  
@@ -198,7 +198,7 @@ void  Geant4GM::TessellatedSolid::CheckVertexIndex(int ifacet, int index) const
     std::cerr << "+++ Error  +++" << std::endl; 
     std::cerr << "    Wrong vertex index: " << index 
              << " in " << ifacet << " th facet." << std::endl;
-    exit(1);
+    throw(1);
   }
 }   
       

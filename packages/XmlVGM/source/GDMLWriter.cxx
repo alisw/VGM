@@ -1299,7 +1299,7 @@ void XmlVGM::GDMLWriter::OpenFile(std::string filePath)
   if (!fOutFile) {
     std::cerr << "   Cannot open " << filePath << std::endl;  
     std::cerr << "** Exception: Aborting execution **" << std::endl;   
-    exit(1);
+    throw(1);
   }
   
   // use FORTRAN compatibility output

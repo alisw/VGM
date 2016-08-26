@@ -129,7 +129,7 @@ VGM::TwoVector  RootGM::Arb8::Vertex(int index) const
   if ( index < 0 || index >= fgkNofVertices ) {
     std::cerr << "+++ Error  +++" << std::endl; 
     std::cerr << "    Wrong vertex index: " << index << std::endl;
-    exit(1);
+    throw(1);
   }  
   
   Double_t* xy = fArb8->GetVertices();
@@ -150,7 +150,7 @@ double  RootGM::Arb8::TwistAngle(int index) const
   if ( index < 0 || index >= 4  ) {
     std::cerr << "+++ Error  +++" << std::endl; 
     std::cerr << "    Wrong twist angle index: " << index << std::endl;
-    exit(1);
+    throw(1);
   }  
   
   Double_t twistAngle 

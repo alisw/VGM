@@ -362,7 +362,7 @@ RootGM::Factory::ImportSolid(TGeoShape* shape)
   }
   else {	    
     std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-    exit(1);
+    throw(1);
   }  
 }
 
@@ -814,7 +814,7 @@ RootGM::Factory::CreateTessellatedSolid(const std::string& name,
   }
   else {	    
     std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-    exit(1);
+    throw(1);
   }  
 }                               
 
@@ -1006,7 +1006,7 @@ RootGM::Factory::CreatePlacement(
       std::cerr << "    RootGM::Factory::CreatePlacement:" << std::endl;
       std::cerr << "    Top volume defided twice!" << std::endl;
       std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-      exit(1);
+      throw(1);
     }		  
   }
   
@@ -1030,7 +1030,7 @@ RootGM::Factory::CreateMultiplePlacement(
     std::cerr << "    RootGM::Factory::CreateMultiplePlacement:" << std::endl;
     std::cerr << "    Mother volume not defined!" << std::endl;
     std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-    exit(1);
+    throw(1);
   }		  
 
   // Create TGeo division
@@ -1055,7 +1055,7 @@ RootGM::Factory::CreateMultiplePlacement(
     std::cerr << "    Daughters of divided volume can be set " <<  std::endl
               << "    only after multiple placement definition." << std::endl   
 	      << "    Geometry would be incomplete." << std::endl;
-    exit(1);	      
+    throw(1);	      
   }	      
 
   (dynamic_cast<RootGM::Volume*>(volume))->ResetVolume(rootVolume);

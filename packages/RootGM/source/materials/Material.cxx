@@ -51,7 +51,7 @@ RootGM::Material::Material(const std::string& name,
     std::cerr << "    RootGM::Material::Material: " << std::endl; 
     std::cerr << "    No element defined.";
     std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-    exit(1);
+    throw(1);
   }
 
   // Create vacuum if density is lower than universe mean density
@@ -108,7 +108,7 @@ RootGM::Material::Material(const std::string& name,
     std::cerr << "    RootGM::Material::Material: " << std::endl; 
     std::cerr << "    No element defined.";
     std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-    exit(1);
+    throw(1);
   }
 
   // Create vacuum if density is lower than universe mean density
@@ -166,7 +166,7 @@ RootGM::Material::Material(const std::string& name,
     std::cerr << "    RootGM::Material::Material: " << std::endl; 
     std::cerr << "    No elements defined.";
     std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-    exit(1);
+    throw(1);
   }
 
   // Check coherence
@@ -174,7 +174,7 @@ RootGM::Material::Material(const std::string& name,
     std::cerr << "    RootGM::Material::Material: " << std::endl; 
     std::cerr << "    Elements size and fractions size differ." << std::endl;
     std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-    exit(1);
+    throw(1);
   }
     
   fMaterial = new TGeoMixture(name.data(), 
@@ -221,7 +221,7 @@ RootGM::Material::Material(const std::string& name,
     std::cerr << "    RootGM::Material::Material: " << std::endl; 
     std::cerr << "    No elements defined.";
     std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-    exit(1);
+    throw(1);
   }
 
   // Check coherence
@@ -229,7 +229,7 @@ RootGM::Material::Material(const std::string& name,
     std::cerr << "    RootGM::Material::Material: " << std::endl; 
     std::cerr << "    Elements size and fractions size differ." << std::endl;
     std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-    exit(1);
+    throw(1);
   }
     
   fMaterial = new TGeoMixture(
@@ -276,7 +276,7 @@ RootGM::Material::Material(const std::string& name,
     std::cerr << "    RootGM::Material::Material: " << std::endl; 
     std::cerr << "    No elements defined.";
     std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-    exit(1);
+    throw(1);
   }
 
   // Check coherence
@@ -284,7 +284,7 @@ RootGM::Material::Material(const std::string& name,
     std::cerr << "    RootGM::Material::Material: " << std::endl; 
     std::cerr << "    Elements size and atomCounts size differ." << std::endl;
     std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-    exit(1);
+    throw(1);
   }
     
   fMaterial = new TGeoMixture(name.data(), 
@@ -337,7 +337,7 @@ RootGM::Material::Material(const std::string& name,
     std::cerr << "    RootGM::Material::Material: " << std::endl; 
     std::cerr << "    No elements defined.";
     std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-    exit(1);
+    throw(1);
   }
 
   // Check coherence
@@ -345,7 +345,7 @@ RootGM::Material::Material(const std::string& name,
     std::cerr << "    RootGM::Material::Material: " << std::endl; 
     std::cerr << "    Elements size and atomCounts size differ." << std::endl;
     std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-    exit(1);
+    throw(1);
   }
     
   fMaterial = new TGeoMixture(
@@ -426,7 +426,7 @@ void RootGM::Material::CheckIndex(int iel) const
     std::cerr << "    RootGM::Material::CheckIndex: " << std::endl;
     std::cerr << "    Index of element outside limits." << std::endl;
     std::cerr << "*** Error: Aborting execution ***" << std::endl;;
-    exit(1);
+    throw(1);
   }  
 }    
 

@@ -67,7 +67,7 @@ RootGM::Element::Element(const std::string& name,
     std::cerr << "    RootGM::Element::Element: " << std::endl; 
     std::cerr << "    No isotopes defined.";
     std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-    exit(1);
+    throw(1);
   }
 
   // Check coherence
@@ -75,7 +75,7 @@ RootGM::Element::Element(const std::string& name,
     std::cerr << "    RootGM::Element::Element: " << std::endl; 
     std::cerr << "    Isotopes size and relAbundances size differ.";
     std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-    exit(1);
+    throw(1);
   }
     
     
@@ -121,7 +121,7 @@ void RootGM::Element::CheckIndex(int i) const
     std::cerr << "    RootGM::Element::CheckIndex: " << std::endl;
     std::cerr << "    Index of isotope outside limits." << std::endl;
     std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-    exit(1);
+    throw(1);
   }  
 }    
 

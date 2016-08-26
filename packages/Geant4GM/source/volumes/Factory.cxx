@@ -353,7 +353,7 @@ Geant4GM::Factory::ImportSolid(G4VSolid* solid)
   }
   else {	    
     std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-    exit(1);
+    throw(1);
   }  
 }
 
@@ -589,7 +589,7 @@ Geant4GM::Factory::ImportPVPair(VGM::IVolume* volume,
       std::cerr << "    Geant4GM::Factory::CreatePlacement: " << std::endl;
       std::cerr << "    Misundersood G4ReflectionFactory behavior " <<std::endl; 
       std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-      exit(1);
+      throw(1);
     }
     else {
       VGM::IVolume* miv2 = Geant4GM::VolumeMap::Instance()->GetVolume(mlv2);
@@ -598,7 +598,7 @@ Geant4GM::Factory::ImportPVPair(VGM::IVolume* volume,
         std::cerr << "    Geant4GM::Factory::CreatePlacement: " << std::endl;
         std::cerr << "    Missing mapping of existing LV to VGM" <<std::endl; 
         std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-        exit(1);
+        throw(1);
       }
       
       G4LogicalVolume* lv2 = pv2->GetLogicalVolume();
@@ -691,7 +691,7 @@ Geant4GM::Factory::CreateArb8(const std::string& name,
     }
     else {	    
       std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-      exit(1);
+      throw(1);
     }
   }    
 
@@ -963,7 +963,7 @@ Geant4GM::Factory::CreateIntersectionSolid(
     std::cerr << "    Reflection in Boolean solid not supported in Geant4."
               << std::endl; 
     std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-    exit(1);
+    throw(1);
   }  	      
                
   VGM::ISolid* vgmSolid 
@@ -992,7 +992,7 @@ Geant4GM::Factory::CreateSubtractionSolid(
     std::cerr << "    Reflection in Boolean solid not supported in Geant4."
               << std::endl; 
     std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-    exit(1);
+    throw(1);
   }  	      
                
   VGM::ISolid* vgmSolid 
@@ -1020,7 +1020,7 @@ Geant4GM::Factory::CreateUnionSolid(
     std::cerr << "    Reflection in Boolean solid not supported in Geant4."
               << std::endl; 
     std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-    exit(1);
+    throw(1);
   }  	      
                
   VGM::ISolid* vgmSolid 
@@ -1048,7 +1048,7 @@ Geant4GM::Factory::CreateDisplacedSolid(
     std::cerr << "    Reflection in Displaced solid not supported in Geant4."
               << std::endl; 
     std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-    exit(1);
+    throw(1);
   }  	      
                
   VGM::ISolid* vgmSolid 
@@ -1070,24 +1070,25 @@ Geant4GM::Factory::CreateVolume(const std::string& name,
 {
 //
   // Get material name from medium
-  const VGM::IMedium* medium = MaterialFactory()->Medium(mediumName);
+ 
+ 
+ const VGM::IMedium* medium = MaterialFactory()->Medium(mediumName);
   if (!medium) {
     std::cerr << "Geant4GM::Factory::CreateVolume: " << std::endl; 
     std::cerr << "   Medium " << mediumName << " not found." << std::endl; 
-    exit(1);
+    throw(1);
   }  
   const VGM::IMaterial* material = medium->Material();
   if (!material) {
     std::cerr << "Geant4GM::Factory::CreateVolume: " << std::endl; 
     std::cerr << "   No material is defined for medium " << mediumName << std::endl; 
-    exit(1);
+    throw(1);
   }  
   std::string materialName = material->Name();
-
-
+  
   VGM::IVolume* volume 
-    = new Geant4GM::Volume(name, solid, materialName, mediumName);
-    
+         = new Geant4GM::Volume(name, solid, materialName, mediumName);
+
   VolumeStore().push_back(volume);
   return volume;
 }  			       
@@ -1134,7 +1135,7 @@ Geant4GM::Factory::CreatePlacement(
       std::cerr << "    Geant4GM::Factory::CreatePlacement:" << std::endl;
       std::cerr << "    Top volume defined twice!" << std::endl;
       std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-      exit(1);
+      throw(1);
     }		  
   }  
   
@@ -1160,7 +1161,7 @@ Geant4GM::Factory::CreateMultiplePlacement(
     std::cerr <<     "Geant4GM::Factory::CreateMultiplePlacement: " 
               << "    Mother volume not defined!" << std::endl;
     std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-    exit(1);	      
+    throw(1);  
   }		  
   
   // Get logical volumes from the volumes map
@@ -1185,7 +1186,7 @@ Geant4GM::Factory::CreateMultiplePlacement(
                 << "  " << VGM::SolidTypeName(motherSolidType)
                 << std::endl
                 << "*** Error: Aborting execution  ***" << std::endl; 
-      exit(1);
+      throw(1);
     }  	      
   }		  
         

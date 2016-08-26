@@ -115,7 +115,7 @@ CLHEP::Hep3Vector ClhepVGM::Translation(const VGM::Transform& transform)
   if (transform.size() != VGM::kSize) {
     std::cerr << "ClhepVGM::Translation: " << std::endl;
     std::cerr << "Wrong vector size " << transform.size() << std::endl;
-    exit(1);
+    throw(1);
   }  
     
   return CLHEP::Hep3Vector(transform[VGM::kDx] / Units::Length(), 
@@ -130,7 +130,7 @@ CLHEP::HepRotation  ClhepVGM::Rotation(const VGM::Transform& transform)
   if (transform.size() != VGM::kSize) {
     std::cerr << "ClhepVGM::Rotation: " << std::endl;
     std::cerr << "Wrong vector size. " << std::endl;
-    exit(1);
+    throw(1);
   }  
     
   CLHEP::HepRotation hepRotation;

@@ -104,7 +104,7 @@ RootGM::BooleanSolid::BooleanSolid(
       std::cerr << "    RootGM::BooleanSolid::BooleanSolid: "<< std::endl;
       std::cerr << "    Unknown Boolean solid type" << std::endl;
       std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-      exit(1);
+      throw(1);
   }  
   
   fCompositeShape = new TGeoCompositeShape(name.data(), boolNode);
@@ -303,7 +303,7 @@ RootGM::BooleanSolid::GetConstituentSolid(
     std::cerr << "    RootGM::BooleanSolid::GetConstituentSolid: " << std::endl;
     std::cerr << "    Index out of scope <0, 1>" << std::endl;
     std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-    exit(1); 
+    throw(1); 
   }   
 }			       
 			       

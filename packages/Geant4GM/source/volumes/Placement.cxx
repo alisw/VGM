@@ -214,7 +214,7 @@ bool Geant4GM::Placement::MultiplePlacementData(
       std::cerr << "    (G4VDivisionParameterisation type was expected.)"  
                 << std::endl; 
       std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-      exit(1);
+      throw(1);
     }
     
     g4Axis = param->GetAxis();

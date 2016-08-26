@@ -139,7 +139,7 @@ TGeoMatrix* RootGM::CreateTransform(const VGM::Transform& transform)
   if (transform.size() != VGM::kSize) {
     std::cerr << "RootGM::CreateTransform: " << std::endl;
     std::cerr << "Wrong transform vector size. " << std::endl;
-    exit(1);
+    throw(1);
   }  
     
   TGeoRotation* rootRotation = new TGeoRotation();

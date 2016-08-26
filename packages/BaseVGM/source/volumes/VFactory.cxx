@@ -168,7 +168,7 @@ BaseVGM::VFactory::ExportBooleanSolid(VGM::IBooleanSolid* solid,
     std::cerr << "    Unknown Boolean type (solid \"" << solid->Name()
               << "\")" << std::endl;
     std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-    exit(1);
+    throw(1);
   }	      
 
   return newSolid;
@@ -393,7 +393,7 @@ BaseVGM::VFactory::ExportSolid(VGM::ISolid* solid,
   std::cerr << "    Unknown solid type (solid \"" << solid->Name()
             << "\")" <<  std::endl;
   std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-  exit(1);
+  throw(1);
   return 0;
 }  
 
@@ -586,7 +586,7 @@ void BaseVGM::VFactory::ExportPlacements(
 	  std::cerr << "    Unknown placement type (placement \""
 	            << daughter->Name() << "\")" << std::endl;
           std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-          exit(1); 		    
+          throw(1);
         }	   
     }
   }

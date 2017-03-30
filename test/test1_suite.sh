@@ -1,5 +1,5 @@
 #!/bin/sh 
-# $Id: test1_suite.sh 666 2010-04-16 10:00:17Z ihrivnac $
+# $Id: test1_suite.sh 798 2017-02-06 11:26:37Z ihrivnac $
 
 # -----------------------------------------------------------------------
 # The test script of the Virtual Geometry Model
@@ -32,7 +32,7 @@ do
   do
     for outputFactory in None Geant4 Root
     do
-      for selectedTest in Solids Placements Reflections Assemblies1 Assemblies2 BooleanSolids2 DisplacedSolids1 DisplacedSolids2 
+      for selectedTest in Solids Placements Reflections ScaledSolids Assemblies1 Assemblies2 BooleanSolids2 DisplacedSolids1 DisplacedSolids2 
       #for selectedTest in Placements 
       do
         DOIT="1"

@@ -1,4 +1,4 @@
-// $Id: TstVGeometry.hh 665 2010-02-23 14:56:32Z ihrivnac $
+// $Id: TstVGeometry.hh 796 2017-02-06 11:00:59Z ihrivnac $
 
 // -----------------------------------------------------------------------
 // The test program of the Virtual Geometry Model
@@ -36,6 +36,7 @@ class TstVGeometry
     virtual void* TestNewSolid2() = 0;
     virtual void* TestPlacements() = 0;
     virtual void* TestReflections(bool fullPhi = true) = 0;
+    virtual void* TestScaledSolids(bool fullPhi = true) = 0;
     virtual void* TestAssemblies();
     virtual void* TestAssemblies2();
     virtual void* TestBooleanSolids1() = 0;

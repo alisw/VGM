@@ -1,4 +1,4 @@
-// $Id: transform.h 665 2010-02-23 14:56:32Z ihrivnac $
+// $Id: transform.h 797 2017-02-06 11:25:32Z ihrivnac $
 
 // -----------------------------------------------------------------------
 // The RootGM package of the Virtual Geometry Model
@@ -32,11 +32,13 @@ namespace RootGM {
     // Root -> VGM
     //
     VGM::Transform  Transform(const TGeoMatrix& matrix);
+    VGM::Transform  TransformScale(const TGeoScale& scale);
     VGM::Transform  Identity();
     bool            HasReflection(const TGeoMatrix& matrix);
     
     // VGM -> Root
     TGeoMatrix*     CreateTransform(const VGM::Transform& transform);
+    TGeoScale*      CreateScale(const VGM::Transform& transform);
     bool            HasReflection(const VGM::Transform& transform);
     
     // Root special

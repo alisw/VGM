@@ -1,4 +1,4 @@
-// $Id: ISolid.h 661 2010-02-05 12:07:38Z ihrivnac $
+// $Id: ISolid.h 797 2017-02-06 11:25:32Z ihrivnac $
 
 // -----------------------------------------------------------------------
 // The VGM package of the Virtual Geometry Model
@@ -46,6 +46,7 @@ namespace VGM {
     kTubs,
     kBoolean,
     kDisplaced,
+    kScaled,
     kUnknownSolid
   };
   

@@ -1,4 +1,4 @@
-$Id: README 787 2015-07-15 14:33:10Z ihrivnac $
+$Id: README 803 2017-02-06 14:10:01Z ihrivnac $
 
 ------------------------------------------------------------------------
  The documentation file for the Virtual Geometry Model
@@ -111,6 +111,16 @@ $Id: README 787 2015-07-15 14:33:10Z ihrivnac $
       
   The geometry conversions between Geant4 and Root
   geometry models are demonstrated in examples E01 and E02.
+
+  Since version 4.4, it is also to use VGM to convert a single solid from one geometry
+  model into another one:
+
+  XFactory xFactory;
+  YFactory yFactory;
+  xFactory.Import(xsolid);
+  xFactory.Export(yFactory);
+  YSolid* ysolid = yFactory.Solid();
+
   
  4. Geometry construction via VGM
  --------------------------------
@@ -152,6 +162,7 @@ $Id: README 787 2015-07-15 14:33:10Z ihrivnac $
  RootGM::Factory theFactory;
  myDetectorConstruction->Construct(&theFactory);
          // Root geometry will be built
+ 
  
  5. XML
  -------
@@ -200,8 +211,8 @@ $Id: README 787 2015-07-15 14:33:10Z ihrivnac $
  7. Platforms
  -------------
 
- Tested on platforms: 
- Linux FC19: gcc 4.8.2, Mac OSX 10.10: clang 3.5
+ Tested on platform: 
+ Mac OSX 10.11.5: with Apple LLVM version 7.3.0
 
  8. Files
  ---------
@@ -210,12 +221,12 @@ $Id: README 787 2015-07-15 14:33:10Z ihrivnac $
               INSTALL  - Installation guides (available for GNUmake, CMake,
                          Autoconf and CMT)	
               INSTALL.GNUmake  - Installation guides for GNUmake (now deprecated)
-	      README   - VGM User's guide (This file)
-	      VGM.html - VGM Web page
-	      VGMhistory.txt  - versions description  
+	            README   - VGM User's guide (This file)
+	            VGM.html - VGM Web page
+	            VGMhistory.txt  - versions description  
    examples - examples for use of VGM
    packages - source code:
-   	      VGM       - interfaces
+   	    VGM       - interfaces
 	      ClhepVGM  - conversion functions between CLHEP and VGM
 	                  transformations
 	      BaseVGM   - common implementation

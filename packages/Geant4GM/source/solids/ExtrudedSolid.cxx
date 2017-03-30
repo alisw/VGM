@@ -51,7 +51,7 @@ Geant4GM::ExtrudedSolid::ExtrudedSolid(const std::string& name,
     std::cerr << "+++ Error  +++" << std::endl; 
     std::cerr << "    Number of z-sections = " << zsections.size() 
               << " has to be >= 2" << std::endl;
-    throw(1);
+    exit(1);
   }             
 
   // Fill polygon 
@@ -295,7 +295,7 @@ VGM::TwoVector  Geant4GM::ExtrudedSolid::Vertex(int index) const
   if ( index < 0 || index > NofVertices() ) {
     std::cerr << "+++ Error  +++" << std::endl; 
     std::cerr << "    Wrong vertex index: " << index << std::endl;
-    throw(1);
+    exit(1);
   }  
  
   return VGM::TwoVector(
@@ -315,7 +315,7 @@ double Geant4GM::ExtrudedSolid::ZPosition(int iz) const
   if ( iz < 0 || iz > NofZSections() ) {
     std::cerr << "+++ Error  +++" << std::endl; 
     std::cerr << "    Wrong index: " << iz << std::endl;
-    throw(1);
+    exit(1);
   }  
  
   ZSectionType zplane = fZSections[iz];
@@ -328,7 +328,7 @@ VGM::TwoVector Geant4GM::ExtrudedSolid::Offset(int iz) const
   if ( iz < 0 || iz > NofZSections() ) {
     std::cerr << "+++ Error  +++" << std::endl; 
     std::cerr << "    Wrong index: " << iz << std::endl;
-    throw(1);
+    exit(1);
   }  
 
   ZSectionType zplane = fZSections[iz];
@@ -342,7 +342,7 @@ double Geant4GM::ExtrudedSolid::Scale(int iz) const
   if ( iz < 0 || iz > NofZSections() ) {
     std::cerr << "+++ Error  +++" << std::endl; 
     std::cerr << "    Wrong index: " << iz << std::endl;
-    throw(1);
+    exit(1);
   }  
 
   ZSectionType zplane = fZSections[iz];

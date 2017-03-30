@@ -1,4 +1,4 @@
-// $Id: vgm_test.cc 781 2015-01-16 14:45:04Z ihrivnac $
+// $Id: vgm_test.cc 796 2017-02-06 11:00:59Z ihrivnac $
 
 // -----------------------------------------------------------------------
 // The test program of the Virtual Geometry Model
@@ -20,8 +20,9 @@
 //         inputFactory  = AGDD, Geant4, Root
 //         outputFactory = Geant4, Root, None
 //         outputXML = AGDD, GDML, None
-//         selectedTest  = Solids, Placements, Reflections, 
-//                         AssembliesN, BooleanSolidsM, Special, DisplacedSolidsN
+//         selectedTest  = Solids, NewSolid, Placements, Reflections, Assemblies,
+//                         AssembliesN, BooleanSolidsM, ScaledSolids, Special, 
+//                         DisplacedSolidsN,
 //                             where N = 1, 2; M = 1, 2, 3
 //         debug         = if specified the factories operate in debug mode
 //         openAngle     = if specified, solids like tubs, cons etc. are built
@@ -29,6 +30,8 @@
 //         noVis         = no visualisation
 //         run           = run with the generator defined in macro/den_selectedTest.mac
 //         rootNavig     = use navigation via G4Root
+//         singleMode    = activate single mode conversion
+//                         (only convert solids from built geometry one by one)
 //
 // Author: Ivana Hrivnacova; IPN Orsay
 
@@ -71,7 +74,8 @@ int main(int argc, char** argv)
     std::cerr << "          outputFactory = Geant4, Root, None" << std::endl;
     std::cerr << "          outputXML     = AGDD, GDML, noXML" << std::endl;
     std::cerr << "          selectedTest  = Solids, NewSolid, Placements, Reflections, Assemblies," << std::endl;
-    std::cerr << "                          AssembliesN, BooleanSolidsM, Special, DisplacedSolidN " << std::endl;
+    std::cerr << "                          AssembliesN, BooleanSolidsM, ScaledSolids, " << std::endl;
+    std::cerr << "                          Special, DisplacedSolidN " << std::endl;
     std::cerr << "                               where N = 1, 2; M = 1, 2, 3" << std::endl;
     std::cerr << "          debug         = if specified the factories operate in debug mode"  << std::endl;
     std::cerr << "          openAngle     = if specified, solids like tubs, cons etc. are built" << std::endl;
@@ -79,7 +83,9 @@ int main(int argc, char** argv)
     std::cerr << "          noVis         = no visualisation" << std::endl;
     std::cerr << "          run           = run with the generator defined in macro/den_selectedTest.mac" << std::endl;
     std::cerr << "          rootNavig     = use navigation via G4Root" << std::endl;
-    
+    std::cerr << "          singleMode    = activate single mode conversion" << std::endl;
+    std::cerr << "                          (only convert solids from built geometry one by one)" << std::endl;
+
     exit(1);
   }  
 
@@ -99,6 +105,7 @@ int main(int argc, char** argv)
   if (outputFactory == "None") visMode = inputFactory;
   G4bool   run = false;
   G4bool   rootNavig = false;
+  G4bool   singleMode = false;
   
   if (argc > 6)
   for (G4int i=6; i<argc; i++) {
@@ -112,6 +119,8 @@ int main(int argc, char** argv)
       run = true;
     else if (G4String(argv[i]) == "rootNavig")  
       rootNavig = true;
+    else if (G4String(argv[i]) == "singleMode")  
+      singleMode = true;
     else  
       std::cerr << " Argument " << argv[i] << " not recognized." << std::endl;
   }   
@@ -128,6 +137,7 @@ int main(int argc, char** argv)
     = new TstDetectorConstruction(inputType, inputFactory, outputFactory, 
                                   outputXML);
   detector->SetDebug(debugMode);
+  detector->SetSingleMode(singleMode);
   detector->SelectTest(selectedTest, fullAngle);  
   detector->SelectVisualization(visMode);  
     

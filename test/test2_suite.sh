@@ -1,5 +1,5 @@
 #!/bin/sh 
-# $Id: test2_suite.sh 666 2010-04-16 10:00:17Z ihrivnac $
+# $Id: test2_suite.sh 802 2017-02-06 14:08:02Z ihrivnac $
 
 # -----------------------------------------------------------------------
 # The test script of the Virtual Geometry Model

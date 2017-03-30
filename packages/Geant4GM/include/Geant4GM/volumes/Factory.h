@@ -1,4 +1,4 @@
-// $Id: Factory.h 751 2014-06-18 15:24:13Z ihrivnac $
+// $Id: Factory.h 797 2017-02-06 11:25:32Z ihrivnac $
 
 // -----------------------------------------------------------------------
 // The Geant4GM package of the Virtual Geometry Model
@@ -167,6 +167,11 @@ namespace Geant4GM {
                                  VGM::ISolid* solid,
                                  const VGM::Transform& transform);
 
+      virtual VGM::ISolid*  CreateScaledSolid(
+                                 const std::string& name, 
+                                 VGM::ISolid* solid,
+                                 const VGM::Transform& transform);
+
       // volumes
       //
       virtual VGM::IVolume* CreateVolume(
@@ -195,14 +200,20 @@ namespace Geant4GM {
       // top volume
       //
       virtual VGM::IPlacement* Top() const;	
-      G4VPhysicalVolume*     World() const;	       
+      virtual VGM::ISolid*     SingleSolid() const;           
+
+      G4VPhysicalVolume*     World() const;
+      G4VSolid*         	   Solid() const;    
 
       // import/export
       //
       bool Import(G4VPhysicalVolume* topVolume);
+      bool Import(G4VSolid* solid);
 
     protected:
       Factory(const Factory& rhs); 
+
+      virtual void SetSolid(VGM::ISolid* solid);
 
     private:
       // methods
@@ -220,16 +231,19 @@ namespace Geant4GM {
       bool          SwitchSolid(VGM::IVolume* volume,
                                 G4LogicalVolume* g4LV,
                                 G4LogicalVolume* g4Mother);
+      VGM::ISolid*  Register(VGM::ISolid* solid);
                                 
       // import/export
       //
       virtual bool Import(void* topVolume);
+      virtual bool ImportSolid(void* solid);
 
       // static data members
       static bool  fgSurfCheck;
 
       // data members
-      VGM::IPlacement*  fTop; 
+      VGM::IPlacement*  fTop;
+      VGM::ISolid*      fSolid;
   };
 
 }

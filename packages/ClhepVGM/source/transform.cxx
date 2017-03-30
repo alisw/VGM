@@ -1,4 +1,4 @@
-// $Id: transform.cxx 634 2008-11-20 13:28:44Z ihrivnac $
+// $Id: transform.cxx 797 2017-02-06 11:25:32Z ihrivnac $
 
 // -----------------------------------------------------------------------
 // The ClhepVGM package of the Virtual Geometry Model
@@ -83,6 +83,17 @@ ClhepVGM::Transform(const HepGeom::Transform3D& objectTransform)
   return transform;
 }
 
+//_____________________________________________________________________________
+VGM::Transform    
+ClhepVGM::TransformScale(const HepGeom::Scale3D& scale3D)
+{
+  VGM::Transform transform(VGM::kSize);
+  transform[VGM::kDx] = scale3D(0,0);
+  transform[VGM::kDy] = scale3D(1,1);
+  transform[VGM::kDz] = scale3D(2,2);
+
+  return transform;
+}
 
 //_____________________________________________________________________________
 VGM::Transform  ClhepVGM::Identity()
@@ -115,12 +126,12 @@ CLHEP::Hep3Vector ClhepVGM::Translation(const VGM::Transform& transform)
   if (transform.size() != VGM::kSize) {
     std::cerr << "ClhepVGM::Translation: " << std::endl;
     std::cerr << "Wrong vector size " << transform.size() << std::endl;
-    throw(1);
+    exit(1);
   }  
     
   return CLHEP::Hep3Vector(transform[VGM::kDx] / Units::Length(), 
                            transform[VGM::kDy] / Units::Length(), 
-		           transform[VGM::kDz] / Units::Length());
+                           transform[VGM::kDz] / Units::Length());
 } 
 
 
@@ -130,7 +141,7 @@ CLHEP::HepRotation  ClhepVGM::Rotation(const VGM::Transform& transform)
   if (transform.size() != VGM::kSize) {
     std::cerr << "ClhepVGM::Rotation: " << std::endl;
     std::cerr << "Wrong vector size. " << std::endl;
-    throw(1);
+    exit(1);
   }  
     
   CLHEP::HepRotation hepRotation;
@@ -140,6 +151,14 @@ CLHEP::HepRotation  ClhepVGM::Rotation(const VGM::Transform& transform)
 
   return hepRotation;
 }  
+
+//_____________________________________________________________________________
+ HepGeom::Scale3D  ClhepVGM::Scale(const VGM::Transform& transform)
+{
+  return HepGeom::Scale3D(transform[VGM::kDx], 
+                          transform[VGM::kDy], 
+                          transform[VGM::kDz]);
+}
 
 //_____________________________________________________________________________
 HepGeom::Transform3D  ClhepVGM::Transform(const VGM::Transform& transform)

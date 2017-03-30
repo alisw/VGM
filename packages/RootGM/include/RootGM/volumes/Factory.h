@@ -1,4 +1,4 @@
-// $Id: Factory.h 751 2014-06-18 15:24:13Z ihrivnac $
+// $Id: Factory.h 797 2017-02-06 11:25:32Z ihrivnac $
 
 // -----------------------------------------------------------------------
 // The RootGM package of the Virtual Geometry Model
@@ -151,6 +151,11 @@ namespace RootGM {
                                  VGM::ISolid* solid,
                                  const VGM::Transform& transform);
 
+      virtual VGM::ISolid*  CreateScaledSolid(
+                                 const std::string& name, 
+                                 VGM::ISolid* solid,
+                                 const VGM::Transform& transform);
+
       // volumes
       //
       virtual VGM::IVolume* CreateVolume(
@@ -176,18 +181,24 @@ namespace RootGM {
                                  double  width,
                                  double  offset);
 
-
       // top volume
       //
       virtual VGM::IPlacement* Top() const;		       
-      TGeoNode*  World() const;	       
+      virtual VGM::ISolid*     SingleSolid() const;           
+      TGeoNode*   World() const;
+      TGeoShape*  Solid() const;
+
 
       // import/export
       //
-      bool Import(TGeoNode* topNode);			       
+      bool Import(TGeoNode* topNode);	
+      bool Import(TGeoShape* shape); 
+
 			       
     protected:
       Factory(const Factory& rhs);
+
+      virtual void SetSolid(VGM::ISolid* solid);
 
     private:
       void          ImportConstituentSolid(int index, TGeoCompositeShape* solid);      
@@ -207,11 +218,15 @@ namespace RootGM {
       void          ImportPositions();
       bool          IsDivided(const TGeoVolume* volume) const;
 
+      VGM::ISolid*  Register(VGM::ISolid* solid);
+
       // import/export
       //
-      virtual bool Import(void* topNode);			       
+      virtual bool Import(void* topNode);
+      virtual bool ImportSolid(void* solid);			       
     
-      VGM::IPlacement* fTop;      
+      VGM::IPlacement* fTop;    
+      VGM::ISolid*     fSolid;
   };
 
 }

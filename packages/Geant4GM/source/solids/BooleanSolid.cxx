@@ -74,7 +74,7 @@ Geant4GM::BooleanSolid::BooleanSolid(
       std::cerr << "    Unknown Boolean solid type (solid \"" 
                 << name << "\")" << std::endl;
       std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-      throw(1);
+      exit(1);
   }    		
 
   Geant4GM::SolidMap::Instance()->AddSolid(this, fBooleanSolid); 

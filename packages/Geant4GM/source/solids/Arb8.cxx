@@ -92,7 +92,7 @@ Geant4GM::Arb8::Arb8(const std::string& name,
   if ( IsTwisted(vertices) ) {
     std::cerr << "+++ Error  +++" << std::endl; 
     std::cerr << "    Twisted Arb8 is not supported " << std::endl;
-    throw(1);
+    exit(1);
   }             
 
   // 3D vertices
@@ -221,7 +221,7 @@ Geant4GM::Arb8::MakeDownFacet(std::vector<G4ThreeVector> fromVertices,
     std::cerr << "    Geant4GM::Arb8::MakeDownFacet:" << std::endl;
     std::cerr << "    Vertices in wrong order." << std::endl; 
     std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-    throw(1);
+    exit(1);
   }
   
   return new G4TriangularFacet(vertices[0], vertices[1],
@@ -257,7 +257,7 @@ Geant4GM::Arb8::MakeUpFacet(std::vector<G4ThreeVector> fromVertices,
     std::cerr << "    Geant4GM::Arb8::MakeUpFacet:" << std::endl;
     std::cerr << "    Vertices in wrong order." << std::endl; 
     std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-    throw(1);
+    exit(1);
   }
   
   return new G4TriangularFacet(vertices[0], vertices[1],
@@ -308,7 +308,7 @@ VGM::TwoVector  Geant4GM::Arb8::Vertex(int index) const
   if ( index < 0 || index >= NofVertices() ) {
     std::cerr << "+++ Error  +++" << std::endl; 
     std::cerr << "    Wrong vertex index: " << index << std::endl;
-    throw(1);
+    exit(1);
   }  
  
   return fVertices[index];
@@ -322,7 +322,7 @@ double Geant4GM::Arb8::TwistAngle(int index) const
   if ( index < 0 || index >= 4  ) {
     std::cerr << "+++ Error  +++" << std::endl; 
     std::cerr << "    Wrong twist angle index: " << index << std::endl;
-    throw(1);
+    exit(1);
   }  
  
   return 0;  

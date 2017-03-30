@@ -1,4 +1,4 @@
-// $Id: solid.cxx 664 2010-02-18 14:43:53Z ihrivnac $
+// $Id: solid.cxx 797 2017-02-06 11:25:32Z ihrivnac $
 
 // -----------------------------------------------------------------------
 // The BaseVGM package of the Virtual Geometry Model
@@ -48,6 +48,7 @@ std::string VGM::SolidTypeName(VGM::SolidType typeId)
     case kTubs:         return "Tubs";      break;
     case kBoolean:      return "Boolean";   break;
     case kDisplaced:    return "Displaced"; break;
+    case kScaled:       return "Scaled";    break;
     case kUnknownSolid: return "Unknown";   break;
     default:            return "Undefined"; break;
   };

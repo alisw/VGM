@@ -899,7 +899,7 @@ void XmlVGM::AGDDWriter::OpenFile(std::string filePath)
   if (!fOutFile) {
     std::cerr << "   Cannot open " << filePath << std::endl;  
     std::cerr << "** Exception: Aborting execution **" << std::endl;   
-    throw(1);
+    exit(1);
   }
   
   // use FORTRAN compatibility output

@@ -1,4 +1,3 @@
-
 // $Id: Volume.cxx 654 2009-03-03 13:11:38Z ihrivnac $
 
 // -----------------------------------------------------------------------
@@ -55,7 +54,7 @@ Geant4GM::Volume::Volume(const std::string& name,
     std::cerr << "    Material \"" << materialName << "\" not found." 
               << std::endl;
     std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-    // throw(1);	      
+    exit(1);	      
   }	      
   
   // Create logical volume

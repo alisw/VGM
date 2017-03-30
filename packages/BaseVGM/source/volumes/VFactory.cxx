@@ -1,4 +1,4 @@
-// $Id: VFactory.cxx 661 2010-02-05 12:07:38Z ihrivnac $
+// $Id: VFactory.cxx 797 2017-02-06 11:25:32Z ihrivnac $
 
 // -----------------------------------------------------------------------
 // The BaseVGM package of the Virtual Geometry Model
@@ -20,6 +20,7 @@
 #include "VGM/solids/ISolid.h"
 #include "VGM/solids/IBooleanSolid.h"
 #include "VGM/solids/IDisplacedSolid.h"
+#include "VGM/solids/IScaledSolid.h"
 #include "VGM/solids/IArb8.h"
 #include "VGM/solids/IBox.h"
 #include "VGM/solids/ICons.h"
@@ -52,6 +53,7 @@ BaseVGM::VFactory::VFactory(const std::string& name,
   : VGM::IFactory(),
     fDebug(0),
     fIgnore(false),
+    fSingleMode(false),
     fName(name),
     fSolids(),
     fVolumes(),
@@ -106,7 +108,7 @@ BaseVGM::VFactory::ExportDisplacedSolid(VGM::IDisplacedSolid* solid,
                                         VGM::IFactory* factory) const
 
 {
-// Exports specified Boolean solid to given factory
+// Exports specified displaced solid to given factory
 // ---
 
   // Export constituent solids first
@@ -122,7 +124,33 @@ BaseVGM::VFactory::ExportDisplacedSolid(VGM::IDisplacedSolid* solid,
     = factory->CreateDisplacedSolid(
                                solid->Name(), 
                                constituentSolid,
-			       transform);
+			                         transform);
+  return newSolid;
+}  
+
+//_____________________________________________________________________________
+VGM::ISolid*  
+BaseVGM::VFactory::ExportScaledSolid(VGM::IScaledSolid* solid,
+                                     VGM::IFactory* factory) const
+
+{
+// Exports specific scaled solid to given factory
+// ---
+
+  // Export constituent solids first
+  VGM::ISolid* constituentSolid = ExportSolid(solid->ConstituentSolid(), factory);
+        // Can lead to a duplication of solids in case
+  // the solid has been already exported
+  // Should not harm, but will be better to be avoided  
+
+
+  VGM::Transform transform =  solid->Scale();
+
+  VGM::ISolid* newSolid 
+    = factory->CreateScaledSolid(
+                               solid->Name(), 
+                               constituentSolid,
+                               transform);
   return newSolid;
 }  
 
@@ -168,7 +196,7 @@ BaseVGM::VFactory::ExportBooleanSolid(VGM::IBooleanSolid* solid,
     std::cerr << "    Unknown Boolean type (solid \"" << solid->Name()
               << "\")" << std::endl;
     std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-    throw(1);
+    exit(1);
   }	      
 
   return newSolid;
@@ -384,6 +412,10 @@ BaseVGM::VFactory::ExportSolid(VGM::ISolid* solid,
     VGM::IDisplacedSolid* displaced = dynamic_cast<VGM::IDisplacedSolid*>(solid);
     return ExportDisplacedSolid(displaced, factory);
   }
+  else if (solidType == VGM::kScaled) { 
+    VGM::IScaledSolid* scaled = dynamic_cast<VGM::IScaledSolid*>(solid);
+    return ExportScaledSolid(scaled, factory);
+  }
   else if (solidType == VGM::kBoolean) { 
     VGM::IBooleanSolid* boolean = dynamic_cast<VGM::IBooleanSolid*>(solid);
     return ExportBooleanSolid(boolean, factory);
@@ -393,7 +425,7 @@ BaseVGM::VFactory::ExportSolid(VGM::ISolid* solid,
   std::cerr << "    Unknown solid type (solid \"" << solid->Name()
             << "\")" <<  std::endl;
   std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-  throw(1);
+  exit(1);
   return 0;
 }  
 
@@ -462,21 +494,25 @@ BaseVGM::VFactory::ExportSimplePlacement(
   VGM::IVolume* newVolume = (*volumeMap)[placement->Volume()];
   VGM::IVolume* newMother = (*volumeMap)[placement->Mother()];
   
-  // If boolean solid that have to be reflected
+  // If boolean or scaled solid that have to be reflected
   /// set reflection to the transformation
   VGM::Transform transform = placement->Transformation();
   VGM::IBooleanSolid* booleanSolid 
     = dynamic_cast<VGM::IBooleanSolid*>(placement->Volume()->Solid());
-  if ( booleanSolid && booleanSolid->ToBeReflected() )
+  VGM::IScaledSolid* scaledSolid 
+    = dynamic_cast<VGM::IScaledSolid*>(placement->Volume()->Solid());
+  if ( ( booleanSolid && booleanSolid->ToBeReflected() ) ||
+       ( scaledSolid && scaledSolid->ToBeReflected() ) ) {
      transform[VGM::kReflZ] = 1;
-  
+  }
+ 
   VGM::IPlacement* newPlacement
     = factory->CreatePlacement(
                        placement->Name(), 
                        placement->CopyNo(),
-	               newVolume,
-		       newMother,
-		       transform);
+                       newVolume,
+                       newMother,
+                       transform);
       
   return newPlacement;
 }
@@ -486,7 +522,7 @@ VGM::IPlacement*
 BaseVGM::VFactory::ExportMultiplePlacement(
                               VGM::IPlacement* placement,
                               VGM::IFactory* factory, 
-			      VolumeMap* volumeMap) const
+                              VolumeMap* volumeMap) const
 {
 // Exports multiple placement.
 // ---
@@ -586,7 +622,7 @@ void BaseVGM::VFactory::ExportPlacements(
 	  std::cerr << "    Unknown placement type (placement \""
 	            << daughter->Name() << "\")" << std::endl;
           std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-          throw(1);
+          exit(1); 		    
         }	   
     }
   }
@@ -621,16 +657,39 @@ bool BaseVGM::VFactory::Export(VGM::IFactory* factory) const
 {
 /// Export the whole geometry to the given factory.
 
-  // Export materials
-  //
-  fMaterialFactory->Export(factory->MaterialFactory());
-  
-  // Export volumes 
-  //
-  VolumeMap* volumeMap = ExportVolumeStore(factory);
-  ExportPlacements(factory, volumeMap);
+  // set the mode to destination factory
+  factory->SetSingleMode(SingleMode());
 
-  return true;  			       
+  if ( ! SingleMode() ) {
+    // Export materials
+    //
+    fMaterialFactory->Export(factory->MaterialFactory());
+
+    // Export volumes 
+    //
+    VolumeMap* volumeMap = ExportVolumeStore(factory);
+    ExportPlacements(factory, volumeMap);
+
+    return true;
+  }
+  else {
+    // one solid mode
+
+    // Check if a solid was created/imported
+    if ( ! SingleSolid() ) {
+      std::cerr << "++ Warning: ++ " << std::endl;
+      std::cerr << "   BaseVGM::Export:" << std::endl; 
+      std::cerr << "   A solid must be created/imported first." << std::endl;
+
+      return false;
+    }
+
+    // Export solid
+    VGM::ISolid* solid = ExportSolid(SingleSolid(), factory);
+    factory->SetSolid(solid);
+
+    return ( solid != 0 );
+  }
 }  
 
 //_____________________________________________________________________________
@@ -672,4 +731,3 @@ void BaseVGM::VFactory::SetDebug (int debug)
   fDebug = debug; 
   MaterialFactory()->SetDebug(debug);
 }
-			       

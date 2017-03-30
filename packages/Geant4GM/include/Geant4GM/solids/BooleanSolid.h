@@ -1,4 +1,4 @@
-// $Id: BooleanSolid.h 634 2008-11-20 13:28:44Z ihrivnac $
+// $Id: BooleanSolid.h 797 2017-02-06 11:25:32Z ihrivnac $
 
 // -----------------------------------------------------------------------
 // The Geant4GM package of the Virtual Geometry Model
@@ -39,9 +39,9 @@ namespace Geant4GM {
       BooleanSolid(const std::string& name, 
                    VGM::BooleanType boolType,
                    VGM::ISolid* solidA, 
-		   VGM::ISolid* solidB, 
+                   VGM::ISolid* solidB, 
                    CLHEP::HepRotation* rotation, 
-		   const CLHEP::Hep3Vector& translation);
+                   const CLHEP::Hep3Vector& translation);
       BooleanSolid(G4BooleanSolid* booleanSolid,
                    G4ReflectedSolid* reflectedBoolean);
       virtual ~BooleanSolid();

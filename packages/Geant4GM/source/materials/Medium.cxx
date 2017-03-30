@@ -87,7 +87,7 @@ void Geant4GM::Medium::CheckIndex(int i) const
     std::cerr << "    Geant4GM::Medium::CheckIndex: " << std::endl;
     std::cerr << "    Index of parameter outside limits." << std::endl;
     std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-    throw(1);
+    exit(1);
   }  
 }    
 

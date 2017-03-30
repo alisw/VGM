@@ -101,7 +101,7 @@ void RootGM::Medium::CheckIndex(int i) const
     std::cerr << "    RootGM::Medium::CheckIndex: " << std::endl;
     std::cerr << "    Index of parameter outside limits." << std::endl;
     std::cerr << "*** Error: Aborting execution  ***" << std::endl; 
-    throw(1);
+    exit(1);
   }  
 }    
 

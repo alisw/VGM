@@ -1,4 +1,4 @@
-# $Id: CMakeLists.txt 787 2015-07-15 14:33:10Z ihrivnac $
+# $Id: CMakeLists.txt 803 2017-02-06 14:10:01Z ihrivnac $
 #
 # ------------------------------------------------------------------------------
 # The configuration file for CMake build for Virtual Geometry Model
@@ -36,10 +36,13 @@ set(CMAKE_MODULE_PATH
 #
 project(VGM)
 set(${PROJECT_NAME}_VERSION_MAJOR "4")
-set(${PROJECT_NAME}_VERSION_MINOR "3")
+set(${PROJECT_NAME}_VERSION_MINOR "4")
 set(${PROJECT_NAME}_VERSION_PATCH "0")
 set(${PROJECT_NAME}_VERSION
     ${${PROJECT_NAME}_VERSION_MAJOR}.${${PROJECT_NAME}_VERSION_MINOR}.${${PROJECT_NAME}_VERSION_PATCH})
+
+#--- Default project build mode ------------------------------------------------
+include(VGMBuildMode)
 
 #--- Options -------------------------------------------------------------------
 option(WITH_GEANT4       "Build Geant4 dependent subpackage (Geant4GM)" ON)
